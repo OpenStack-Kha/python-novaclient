@@ -87,7 +87,7 @@ def _boot(cs, args, reservation_id=None, min_count=None, max_count=None):
 
     nics = []
     for nic_str in args.nics:
-        nic_info = {"net-id": "", "v4-fixed-ip": ""}
+        nic_info = {"net-id": "", "v4-fixed-ip": "", "fixed-mac": ""}
         for kv_str in nic_str.split(","):
             k, v = kv_str.split("=")
             nic_info[k] = v
@@ -171,14 +171,15 @@ def _boot(cs, args, reservation_id=None, min_count=None, max_count=None):
         metavar='<key=value>',
         help="Send arbitrary key/value pairs to the scheduler for custom use.")
 @utils.arg('--nic',
-     metavar="<net-id=net-uuid,v4-fixed-ip=ip-addr>",
+     metavar="<net-id=net-uuid,v4-fixed-ip=ip-addr,fixed-mac=mac-addr>",
      action='append',
      dest='nics',
      default=[],
      help="Create a NIC on the server.\n"
            "Specify option multiple times to create multiple NICs.\n"
            "net-id: attach NIC to network with this UUID (optional)\n"
-           "v4-fixed-ip: IPv4 fixed address for NIC (optional).")
+           "v4-fixed-ip: IPv4 fixed address for NIC (optional).\n" \
+           "fixed-mac: fixed MAC address for NIC (optional)")
 def do_boot(cs, args):
     """Boot a new server."""
     boot_args, boot_kwargs = _boot(cs, args)
