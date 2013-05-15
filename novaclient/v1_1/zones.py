@@ -37,25 +37,36 @@ class ZoneManager(base.ManagerWithFind):
         If node_id is None then create new zone with zone_name
         else create association zone_name/node_id
 
-        :rtype: List of records??????
+        :rtype: List of zones
         """
 
         #body = {"network": kwargs}
         #return self._create('/os-networks', body, 'network')
 
         #return self._update("/os-aggregates/%s" % base.getid(aggregate), body, "aggregate")
-
+        if node_id is not None:
+            zone_list = self._list("/zones/add?zone_name=%s&node_id=%s" % (zone_name, node_id), "zones")
+        else:
+            zone_list = self._list("/zones/add?zone_name=%s" % zone_name, "zones")
         print('Add zone')
-        pass
+        print(zone_list)
+        return zone_list
 
     def delete(self, zone_name, node_id=None):
         """
         If node_id is None then delete zone and all associations
         else delete association zone_name/node_id
 
-        :rtype: None
+        :rtype: List of zones
         """
         #self._delete("/os-zones/%s" % base.getid(network))
+        if node_id is not None:
+            zone_list = self._list("/zones/delete?zone_name=%s&node_id=%s" % (zone_name, node_id), "zones")
+        else:
+            zone_list = self._list("/zones/delete?zone_name=%s" % zone_name, "zones")
+        print('Delete zone')
+        print(zone_list)
+        return zone_list
         print('Delete zone')
         pass
 

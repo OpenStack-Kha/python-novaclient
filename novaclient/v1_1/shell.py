@@ -778,8 +778,6 @@ def do_zone_list(cs, args):
      help="Associate node to zone")
 def do_zone_add(cs, args):
     cs.zones.add(args.zone_name, args.node_id)
-    #print('HHHHHHHHHHH do_zone_list HHHHHHHHHHH')
-    #print(args)
 
 
 @utils.arg('--zone-name',
@@ -790,8 +788,6 @@ def do_zone_add(cs, args):
      help="Remove association node to zone")
 def do_zone_delete(cs, args):
     cs.zones.delete(args.zone_name, args.node_id)
-    #print('HHHHHHHHHHH do_zone_list HHHHHHHHHHH')
-    #print(args)
 
 
 @utils.arg('--limit',
