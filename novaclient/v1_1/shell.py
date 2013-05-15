@@ -763,6 +763,37 @@ def do_network_create(cs, args):
     cs.networks.create(**kwargs)
 
 
+@utils.arg('--zone-name',
+     metavar='<zone_name>',
+     help="Show nodes by zone name")
+def do_zone_list(cs, args):
+    zone_list = cs.zones.list(args.zone_name)
+
+
+@utils.arg('--zone-name',
+     metavar='<zone_name>',
+     help="Add new zone")
+@utils.arg('--node-id',
+     metavar='<node_id>',
+     help="Associate node to zone")
+def do_zone_add(cs, args):
+    cs.zones.add(args.zone_name, args.node_id)
+    #print('HHHHHHHHHHH do_zone_list HHHHHHHHHHH')
+    #print(args)
+
+
+@utils.arg('--zone-name',
+     metavar='<zone_name>',
+     help="Remove zone")
+@utils.arg('--node-id',
+     metavar='<node_id>',
+     help="Remove association node to zone")
+def do_zone_delete(cs, args):
+    cs.zones.delete(args.zone_name, args.node_id)
+    #print('HHHHHHHHHHH do_zone_list HHHHHHHHHHH')
+    #print(args)
+
+
 @utils.arg('--limit',
      dest="limit",
      metavar="<limit>",

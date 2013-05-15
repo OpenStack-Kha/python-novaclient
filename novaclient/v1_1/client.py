@@ -46,6 +46,7 @@ from novaclient.v1_1 import volume_types
 from novaclient.v1_1 import services
 from novaclient.v1_1 import fixed_ips
 from novaclient.v1_1 import floating_ips_bulk
+from novaclient.v1_1 import zones
 
 
 class Client(object):
@@ -118,6 +119,7 @@ class Client(object):
         self.coverage = coverage_ext.CoverageManager(self)
         self.availability_zones = \
             availability_zones.AvailabilityZoneManager(self)
+        self.zones = zones.ZoneManager(self)
 
         # Add in any extensions...
         if extensions:
