@@ -1702,3 +1702,16 @@ class FakeHTTPClient(base_client.HTTPClient):
                  "action": "create",
                  "message": None,
                  "project_id": "04019601fe3648c0abd4f4abfb9e6106"}})
+
+    def get_zones_add(self, **kw):
+        return (200, {}, {"zones": [
+                    {'id': 1, 'name': 'zone1'},
+                    ]})
+
+    def get_zones_list(self, **kw):
+        return (200, {}, {"zones": [
+                    {'id': 1, 'name': 'zone1'},
+                    ]})
+
+    def get_zones_delete(self, **kw):
+        return (200, {}, {"zones": []})

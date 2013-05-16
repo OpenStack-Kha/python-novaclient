@@ -1,5 +1,6 @@
 from novaclient import base
 
+
 class Zone(base.Resource):
     """
     A Zone.
@@ -7,8 +8,9 @@ class Zone(base.Resource):
     def __repr__(self):
         if hasattr(self, 'id'):
             return "<Zone: id=%s, name=%s>" % (self.id, self.name)
-        elif hasattr(self,'node_id'):
-            return "<Zone: name=%s, Node id=%s>" % (self.zone_name, self.node_id)
+        elif hasattr(self, 'node_id'):
+            return "<Zone: name=%s, Node id=%s>" % (self.zone_name,
+                                                    self.node_id)
 
 
 class ZoneManager(base.ManagerWithFind):
@@ -25,9 +27,11 @@ class ZoneManager(base.ManagerWithFind):
         :rtype: List of zones
         """
         if zone_name is not None:
-            zone_list = self._list("/zones/list?zone_name=%s" % zone_name, "zones")
+            zone_list = self._list("/zones/list?zone_name=%s" % zone_name,
+                                   "zones")
         else:
-            zone_list = self._list("/zones/list", "zones")
+            zone_list = self._list("/zones/list",
+                                   "zones")
         print('List of zones')
         print(zone_list)
         return zone_list
@@ -43,11 +47,15 @@ class ZoneManager(base.ManagerWithFind):
         #body = {"network": kwargs}
         #return self._create('/os-networks', body, 'network')
 
-        #return self._update("/os-aggregates/%s" % base.getid(aggregate), body, "aggregate")
+        #return self._update("/os-aggregates/%s" % base.getid(aggregate),
+        # body, "aggregate")
         if node_id is not None:
-            zone_list = self._list("/zones/add?zone_name=%s&node_id=%s" % (zone_name, node_id), "zones")
+            zone_list = self._list("/zones/add?zone_name=%s&node_id=%s" %
+                                   (zone_name, node_id),
+                                   "zones")
         else:
-            zone_list = self._list("/zones/add?zone_name=%s" % zone_name, "zones")
+            zone_list = self._list("/zones/add?zone_name=%s" % zone_name,
+                                   "zones")
         print('Add zone')
         print(zone_list)
         return zone_list
@@ -61,10 +69,12 @@ class ZoneManager(base.ManagerWithFind):
         """
         #self._delete("/os-zones/%s" % base.getid(network))
         if node_id is not None:
-            zone_list = self._list("/zones/delete?zone_name=%s&node_id=%s" % (zone_name, node_id), "zones")
+            zone_list = self._list("/zones/delete?zone_name=%s&node_id=%s" %
+                                   (zone_name, node_id),
+                                   "zones")
         else:
-            zone_list = self._list("/zones/delete?zone_name=%s" % zone_name, "zones")
+            zone_list = self._list("/zones/delete?zone_name=%s" % zone_name,
+                                   "zones")
         print('Delete zone')
         print(zone_list)
         return zone_list
-
