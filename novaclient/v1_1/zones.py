@@ -67,6 +67,4 @@ class ZoneManager(base.ManagerWithFind):
         print('Delete zone')
         print(zone_list)
         return zone_list
-        print('Delete zone')
-        pass
 
